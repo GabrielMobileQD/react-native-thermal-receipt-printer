@@ -65,9 +65,13 @@ const textPreprocessingIOS = (text: string) => {
   let options = {
     beep: true,
     cut: true,
+    bold:true
   };
   return {
-    text: "Teste",
+    text: text
+      .replace(/<\/?CB>/g, "")
+      .replace(/<\/?C>/g, "")
+      .replace(/<\/?B>/g, ""),
     opts: options,
   };
 };
@@ -154,19 +158,18 @@ export const BLEPrinter = {
     }),
 
   printText: (text: string, opts: PrinterOptions = {}): void => {
-    // if (Platform.OS === "ios") {
-    //   const processedText = textPreprocessingIOS(text);
-    //   console.log('processedText',processedText)
-    //   RNBLEPrinter.printRawData(
-    //     processedText.text,
-    //     processedText.opts,
-    //     (error: Error) => console.warn(error)
-    //   );
-    // } else {
+    if (Platform.OS === "ios") {
+      const processedText = textPreprocessingIOS(text);
+      RNBLEPrinter.printRawData(
+        processedText.text,
+        processedText.opts,
+        (error: Error) => console.warn(error)
+      );
+    } else {
       RNBLEPrinter.printRawData(textTo64Buffer(text, opts), (error: Error) =>
         console.warn(error)
       );
-   // }
+    }
   },
 
   printBill: (text: string, opts: PrinterOptions = {}): void => {
