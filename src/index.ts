@@ -67,12 +67,7 @@ const textPreprocessingIOS = (text: string) => {
     cut: true,
   };
   return {
-    text: text
-      .replace(/<\/?CB>/g, "")
-      .replace(/<\/?C>/g, "")
-      .replace(/<\/?B>/g, "")
-      .replace(/<\/?R>/g, "")
-      .replace(/<\/?L>/g, ""),
+    text: "Teste",
     opts: options,
   };
 };
@@ -161,6 +156,7 @@ export const BLEPrinter = {
   printText: (text: string, opts: PrinterOptions = {}): void => {
     if (Platform.OS === "ios") {
       const processedText = textPreprocessingIOS(text);
+      console.log('processedText',processedText)
       RNBLEPrinter.printRawData(
         processedText.text,
         processedText.opts,
