@@ -154,19 +154,19 @@ export const BLEPrinter = {
     }),
 
   printText: (text: string, opts: PrinterOptions = {}): void => {
-    if (Platform.OS === "ios") {
-      const processedText = textPreprocessingIOS(text);
-      console.log('processedText',processedText)
-      RNBLEPrinter.printRawData(
-        processedText.text,
-        processedText.opts,
-        (error: Error) => console.warn(error)
-      );
-    } else {
+    // if (Platform.OS === "ios") {
+    //   const processedText = textPreprocessingIOS(text);
+    //   console.log('processedText',processedText)
+    //   RNBLEPrinter.printRawData(
+    //     processedText.text,
+    //     processedText.opts,
+    //     (error: Error) => console.warn(error)
+    //   );
+    // } else {
       RNBLEPrinter.printRawData(textTo64Buffer(text, opts), (error: Error) =>
         console.warn(error)
       );
-    }
+   // }
   },
 
   printBill: (text: string, opts: PrinterOptions = {}): void => {
