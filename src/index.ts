@@ -173,14 +173,7 @@ export const BLEPrinter = {
   },
 
   printBill: (text: string, opts: PrinterOptions = {}): void => {
-    if (Platform.OS === "android") {
-      const processedText = textPreprocessingIOS(text);
-      RNBLEPrinter.printRawData(
-        processedText.text,
-        processedText.opts,
-        (error: Error) => console.warn(error)
-      );
-    } else {
+
       RNBLEPrinter.printRawData(billTo64Buffer(text, opts),{
         beep: false,
         cut: false,
@@ -189,7 +182,6 @@ export const BLEPrinter = {
       }, (error: Error) =>
         console.warn(error)
       );
-    }
   },
 
   // printImage: async (imagePath: string) => {
