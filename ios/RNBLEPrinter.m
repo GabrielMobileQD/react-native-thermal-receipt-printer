@@ -93,20 +93,23 @@ RCT_EXPORT_METHOD(printRawData:(NSString *)text
         
         NSNumber* boldPtr = [options valueForKey:@"bold"];
         NSNumber* alignCenterPtr = [options valueForKey:@"center"];
-
+        printf("%s", text);
+        printf("%s", options);
         BOOL bold = (BOOL)[boldPtr intValue];
         BOOL alignCenter = (BOOL)[alignCenterPtr intValue];
-
-        // bold ? [[PrinterSDK defaultPrinterSDK] sendHex:@"1B2108"] : [[PrinterSDK defaultPrinterSDK] sendHex:@"1B2100"];
-        // alignCenter ? [[PrinterSDK defaultPrinterSDK] sendHex:@"1B6102"] : [[PrinterSDK defaultPrinterSDK] sendHex:@"1B6101"];
-        // [[PrinterSDK defaultPrinterSDK] printText:text];
+        printf("%s", bold);
+        printf("%s", alignCenter);
+        bold ? [[PrinterSDK defaultPrinterSDK] sendHex:@"1B2108"] : [[PrinterSDK defaultPrinterSDK] sendHex:@"1B2100"];
+        alignCenter ? [[PrinterSDK defaultPrinterSDK] sendHex:@"1B6102"] : [[PrinterSDK defaultPrinterSDK] sendHex:@"1B6101"];
+        [[PrinterSDK defaultPrinterSDK] printText:text];
         
         NSNumber* beepPtr = [options valueForKey:@"beep"];
         NSNumber* cutPtr = [options valueForKey:@"cut"];
         
         BOOL beep = (BOOL)[beepPtr intValue];
         BOOL cut = (BOOL)[cutPtr intValue];
-        
+        printf("%s", beep);
+        printf("%s", cut);
         beep ? [[PrinterSDK defaultPrinterSDK] beep] : nil;
         cut ? [[PrinterSDK defaultPrinterSDK] cutPaper] : nil;
         
