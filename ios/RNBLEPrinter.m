@@ -93,14 +93,13 @@ RCT_EXPORT_METHOD(printRawData:(NSString *)text
         
         NSNumber* boldPtr = [options valueForKey:@"bold"];
         NSNumber* alignCenterPtr = [options valueForKey:@"center"];
-        printf("%s", text);
-        printf("%s", options);
         BOOL bold = (BOOL)[boldPtr intValue];
         BOOL alignCenter = (BOOL)[alignCenterPtr intValue];
-        printf("%s", bold);
-        printf("%s", alignCenter);
+    
         // bold ? [[PrinterSDK defaultPrinterSDK] sendHex:@"1B2108"] : [[PrinterSDK defaultPrinterSDK] sendHex:@"1B2100"];
         // alignCenter ? [[PrinterSDK defaultPrinterSDK] sendHex:@"1B6102"] : [[PrinterSDK defaultPrinterSDK] sendHex:@"1B6101"];
+        [[PrinterSDK defaultPrinterSDK] setPrintWidth:2];
+
         [[PrinterSDK defaultPrinterSDK] printText:text];
         
         NSNumber* beepPtr = [options valueForKey:@"beep"];
